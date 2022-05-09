@@ -1,1 +1,89 @@
+@use '@angular/material' as mat;
+
+//all theming in this file
+
+//angular material styling
+@include mat.core();
+
+$sky-bet-test-primary-map: (
+  50 : #132C6C,
+  100 : #132C6C,
+  200 : #2658D9,
+  300 : #2658D9,
+  400 : #93ACEC,
+  500 : #93ACEC,
+  600 : #93ACEC,
+  700:#93ACEC,
+  800:#93ACEC,
+  900:#93ACEC,
+  contrast: (
+    50: #ececec
+  )
+);
+
+$sky-bet-test-accent-map: (
+  50 : #730D0C,
+  100 : #730D0C,
+  200 : #DF1918,
+  300 : #DF1918,
+  400 : #DF1918,
+  500 : #DF1918,
+  600 : #DF1918,
+  700 : #F38C8C,
+  800 : #F38C8C,
+  900 : #F38C8C,
+  contrast: (
+    50: #ececec
+  )
+);
+
+$sky-bet-test-primary: mat.define-palette($sky-bet-test-primary-map);
+$sky-bet-test-accent: mat.define-palette($sky-bet-test-accent-map);
+
+$sky-bet-test-warn: mat.define-palette(mat.$red-palette);
+
+$sky-bet-test-theme: mat.define-light-theme((
+  color: (
+    primary: $sky-bet-test-primary,
+    accent: $sky-bet-test-accent,
+    warn: $sky-bet-test-warn,
+  )
+));
+
+@include mat.all-component-themes($sky-bet-test-theme);
+
+.home-background {
+  background-color: map_get(map_get($sky-bet-test-theme, primary), 700);
+  color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 50);
+
+  .control-panel {
+    background-color: map_get(map_get($sky-bet-test-theme, accent), 700);
+  }
+
+  .matches-wrapper {
+    background-color: map_get(map_get($sky-bet-test-theme, primary), 200);
+
+    app-match .wrapper {
+      background-color: map_get(map_get($sky-bet-test-theme, primary), 100);
+
+      .outcome-price{
+        background-color: map_get(map_get($sky-bet-test-theme, accent), 50);
+      }
+    }
+  }
+
+}
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto,
+  "Helvetica Neue",
+  sans-serif;
+}
