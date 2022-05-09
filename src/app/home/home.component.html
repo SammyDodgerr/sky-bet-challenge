@@ -14,7 +14,8 @@
       </mat-slide-toggle>
     </div>
 
-    <app-match *ngFor="let match of allMatches"
+    <!-- loop through all the matches with an ngFor -->
+    <app-match *ngFor="let match of allMatches | hideDisplayable"
                [match]="match"
                [showFractionalPrice]="fractional"
                [showPrimaryMarkets]="showPrimaryMarkets">

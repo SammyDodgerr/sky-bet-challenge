@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WebSocketService } from "../services/web-socket.service";
-import { ApiMessageType, FootballMatch } from "../api-models";
+import { ApiMessageType, MatchDetail } from "../api-models";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { take } from "rxjs/operators";
 
@@ -12,9 +12,10 @@ import { take } from "rxjs/operators";
 export class HomeComponent implements OnInit {
 
   constructor(private webSocketService: WebSocketService) {
+    webSocketService.onRefreshSocket();
   }
 
-  public allMatches: FootballMatch[] = [];
+  public allMatches: MatchDetail[] = [];
   public showPrimaryMarkets = false;
   public fractional = false;
 
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
         () =>
           //3) send our initial request to retrieve all football matches
         this.getAllMatches()
-      )
+      );
   }
 
   private getAllMatches(){
@@ -43,7 +44,6 @@ export class HomeComponent implements OnInit {
     switch (message.type as ApiMessageType){
       case ApiMessageType.LiveEventsData:
         this.allMatches = message.data;
-        console.log(this.allMatches);
     }
   }
 

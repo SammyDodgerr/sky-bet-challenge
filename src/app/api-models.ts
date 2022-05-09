@@ -7,11 +7,12 @@ export interface ApiMessage {
 export enum ApiMessageType {
   Init = 'INIT',
   LiveEventsData = 'LIVE_EVENTS_DATA',
+  EventData = 'EVENT_DATA',
   MarketData = 'MARKET_DATA',
   OutcomeData = 'OUTCOME_DATA'
 }
 
-export interface FootballMatch {
+export interface MatchDetail {
   boostCount: number,
   classId: number,
   className: string,
@@ -54,7 +55,7 @@ interface Status {
   suspended: boolean
 }
 
-export interface PrimaryMarkets {
+export interface PrimaryMarket {
   displayOrder: number,
   eventId: number,
   liabilities: { livePriceLimit: number },
@@ -66,7 +67,7 @@ export interface PrimaryMarkets {
   type: string
 }
 
-export interface OutcomeData {
+export interface Outcome {
   displayOrder: number,
   eventId: number,
   marketId: number,
@@ -74,5 +75,5 @@ export interface OutcomeData {
   outcomeId: number,
   price: { den: number, num: number, decimal: number },
   result: { place: number, result: string, favourite: boolean },
-  status: Status
+  status: Status,
 }

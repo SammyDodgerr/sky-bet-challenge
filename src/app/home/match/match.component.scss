@@ -1,6 +1,6 @@
 .wrapper {
   width: var(--width);
-  height: 2rem;
+  height: 5rem;
   margin-bottom: var(--margin-bottom);
   padding: var(--padding);
   border-radius: var(--border-radius);
@@ -8,9 +8,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
 
   .summary {
     font-size: larger;
+
+    button{
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+    }
   }
 
   &.show-primary-markets {
@@ -20,19 +27,4 @@
       margin-bottom: 1rem;
     }
   }
-
-  .outcome {
-    margin: 0.5rem;
-    &-name {
-      font-size: smaller;
-      margin-right: 0.25rem;
-    }
-
-    &-price {
-      font-size: smaller;
-      padding: 0.25rem;
-      border-radius: 0.25rem;
-    }
-  }
-
 }

@@ -52,6 +52,7 @@ $sky-bet-test-theme: mat.define-light-theme((
 
 @include mat.all-component-themes($sky-bet-test-theme);
 
+//HOME PAGE
 .home-background {
   background-color: map_get(map_get($sky-bet-test-theme, primary), 700);
   color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 50);
@@ -66,12 +67,29 @@ $sky-bet-test-theme: mat.define-light-theme((
     app-match .wrapper {
       background-color: map_get(map_get($sky-bet-test-theme, primary), 100);
 
-      .outcome-price{
-        background-color: map_get(map_get($sky-bet-test-theme, accent), 50);
+      .outcome-price {
+        background-color: map_get(map_get($sky-bet-test-theme, accent), 200);
       }
     }
   }
+}
 
+//MATCH DETAIL
+.match-detail-background{
+  background-color: map_get(map_get($sky-bet-test-theme, primary), 700);
+  color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 50);
+
+  .metadata{
+    background-color: map_get(map_get($sky-bet-test-theme, accent), 50);
+  }
+}
+
+button.accent{
+  background-color: map_get(map_get($sky-bet-test-theme, accent), 50);
+  svg{
+    fill: map_get(map_get(map_get($sky-bet-test-theme, accent), contrast), 50);
+
+  }
 }
 
 /* You can add global styles to this file, and also import other style files */

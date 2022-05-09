@@ -6,23 +6,29 @@ import { ApiMessage } from "../api-models";
   providedIn: 'root'
 })
 export class WebSocketService {
-  private socket: WebSocket;
-  //replay subject, to allow new subscribers to know if the connection has already been established.
-  private webSocketReady = new ReplaySubject<void>();
+  private url = "ws://localhost:8889";
+
+  private socket: WebSocket | undefined;
+  private webSocketReady = new Subject<void>();
 
   //subject to send all messages on
   private socketMessages = new Subject<ApiMessage>();
 
   constructor() {
-    //create the socket
-    this.socket = this.create("ws://localhost:8889");
+  }
+
+  onRefreshSocket(){
+    if(this.socket){
+      this.socket.close();
+    }
+    this.socket = this.create(this.url);
   }
 
   getWebSocketMessages(): Subject<ApiMessage> {
     return this.socketMessages;
   }
 
-  getWebSocketReady(): ReplaySubject<void> {
+  getWebSocketReady(): Subject<void> {
     return this.webSocketReady;
   }
 
@@ -46,6 +52,6 @@ export class WebSocketService {
   }
 
   sendRequest(s: string) {
-    this.socket.send(s);
+    this.socket?.send(s);
   }
 }
