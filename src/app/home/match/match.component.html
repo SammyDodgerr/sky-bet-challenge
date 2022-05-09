@@ -1,0 +1,10 @@
+<div class="wrapper" [ngClass]="{'show-primary-markets': showPrimaryMarkets}">
+  <span class="summary">{{match?.name}}</span>
+  <div *ngIf="showPrimaryMarkets">
+    <span>{{primaryMarkets?.name}}</span>
+    <div *ngFor="let outcome of outcomes | keyvalue" class="outcome">
+      <span class="outcome-name">{{outcome.value.name}}</span>
+      <span class="outcome-price">{{getPrice(outcome.value.price.decimal)}}</span>
+    </div>
+  </div>
+</div>
