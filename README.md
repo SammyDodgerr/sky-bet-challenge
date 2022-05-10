@@ -19,7 +19,16 @@ Alternatively, you can use the Angular CLI (again this will need to be downloade
 You could also shell into the UI container using docker desktop and run 'ng test' (where the angular CLI is already installed). <br>
  
 ## Usage
+Note: this site has been optimized for desktop and is recommended to use it on bigger screens.<br>
+Given more time a mobile friendly view could be optimized.
 
+<b>Market View</b><br>
 The bell with the plus icon is available on markets, which enables live updates on the event. 
-These should flash green when updated.
-The '+' icon allows users to add outcomes to betslips, which should be maintained as you navigate through the UI. You can clear the betslip with the button at the bottom.
+These outcomes should flash green when updated.
+The '+' icon allows users to add outcomes to betslips, which is maintained as you navigate through the UI. You can clear the betslip at any time with the button at the bottom.
+
+<b>Toolbar</b><br>
+There is a dynamic toolbar at the top right of the UI that is maintained throughout navigation, this shows toggles for displays.
+
+<b>General</b><br>
+If you ever want to go back to the main view from a match detail, there is a home icon in the top right of the match-detail view.

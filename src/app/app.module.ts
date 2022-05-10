@@ -20,6 +20,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { DisplayOrderSortPipe } from './shared/pipes/display-order-sort.pipe';
 import { HideDisplayablePipe } from './shared/pipes/hide-displayable.pipe';
 import { SubscribeForUpdatesComponent } from './subscribe-for-updates/subscribe-for-updates.component';
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -32,19 +33,20 @@ import { SubscribeForUpdatesComponent } from './subscribe-for-updates/subscribe-
     HideDisplayablePipe,
     SubscribeForUpdatesComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    CommonModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatSlideToggleModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatExpansionModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        CommonModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatSlideToggleModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+        MatTabsModule
+    ],
   providers: [IconRegistryService],
   bootstrap: [AppComponent]
 })

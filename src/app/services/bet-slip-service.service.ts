@@ -32,11 +32,11 @@ export class BetSlipServiceService {
   addToBetSlip(outcome: Outcome, market: PrimaryMarket, eventName: any) {
     if(this.bets.has(`${eventName} : ${market.name}`)){
       var existingOutcomes = this.bets.get(`${eventName} : ${market.name}`);
-      existingOutcomes?.set(outcome.outcomeId, {...outcome, flash: true});
+      existingOutcomes?.set(outcome.outcomeId, outcome);
       this.bets?.set(`${eventName} : ${market.name}`, existingOutcomes as Map<any, Outcome>);
     } else {
       var newOutcomes = new Map();
-      newOutcomes.set(outcome.outcomeId, {...outcome, flash: true});
+      newOutcomes.set(outcome.outcomeId, outcome);
       this.bets.set(`${eventName} : ${market.name}`, newOutcomes as Map<any, Outcome>);
     }
 
@@ -45,7 +45,6 @@ export class BetSlipServiceService {
   }
 
   private onHandleWsSocketMessage(result: ApiMessage) {
-    console.log(result);
     const eventId = _.get(result, 'data.eventId');
     const outcomeId = _.get(result, 'data.outcomeId');
     if (result.type === ApiMessageType.PriceChange && this.bets?.has(eventId) && this.bets.get(eventId)?.has(outcomeId)) {

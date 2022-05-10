@@ -1,21 +1,55 @@
-<div *ngIf="!outcomesLoading">
-  <app-subscribe-for-updates
-    *ngIf="(outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length > 0"
-    (priceChange)="onPriceChange($event)"
-    [subscriptionId]="primaryMarket?.eventId">
+<app-subscribe-for-updates
+  *ngIf="!outcomesLoading && (outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length > 0"
+  (priceChange)="onPriceChange($event)"
+  [subscriptionId]="primaryMarket?.eventId">
+</app-subscribe-for-updates>
 
-  </app-subscribe-for-updates>
+<div  *ngIf="!outcomesLoading && !correctScoreData" class="outcomes-wrapper" [ngClass]="{winDrawWin: primaryMarket?.type === 'win-draw-win'}">
   <span *ngIf="!detailMode && (outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length > 0">{{primaryMarket?.name}}</span>
-  <div *ngFor="let outcome of outcomes | keyvalue | hideDisplayable : 'value.status.displayable'" class="outcome" [ngClass]="{flash: outcome.value.flash} ">
+  <div *ngFor="let outcome of outcomes | keyvalue | hideDisplayable : 'value.status.displayable'"
+       class="outcome"
+       [ngClass]="{flash: outcome.value.flash}">
     <span class="outcome-name">{{outcome.value.name}}</span>
     <span class="outcome-price" *ngIf="!outcome.value.status.suspended">{{getPrice(outcome.value.price.decimal)}}</span>
     <span class="outcome-price" *ngIf="outcome.value.status.suspended">SUSPENDED</span>
     <button mat-icon-button
             matTooltip="Add to betslip"
-            (click)="addToBetSlip(outcome.value)" color="primary"><mat-icon svgIcon="add"></mat-icon></button>
+            (click)="addToBetSlip(outcome.value)" class="accent add-to-betslip"><mat-icon svgIcon="add"></mat-icon></button>
   </div>
   <span *ngIf="(outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length <= 0">No outcomes currently available for this market</span>
   <button mat-raised-button *ngIf="detailMode && hasMoreToShow()" color="accent" (click)="showMore.emit()">Show more</button>
 </div>
+
+<!--correct score-->
+<div *ngIf="!outcomesLoading && correctScoreData" class="correct-score-data">
+    <div class="home">
+      <div>{{correctScoreData.homeTeam}}</div>
+      <div *ngFor="let home of correctScoreData.home" class="correct-score-item">
+        <span>{{home.score.home}} - {{home.score.away}}</span>
+        <span class="outcome-price" *ngIf="!home.status.suspended">{{getPrice(home.price.decimal)}}</span>
+        <span class="outcome-price" *ngIf="home.status.suspended">SUSPENDED</span>
+        <button mat-icon-button
+                matTooltip="Add to betslip"
+                *ngIf="!home.status.suspended"
+                (click)="addToBetSlip(home)" class="accent"><mat-icon svgIcon="add"></mat-icon></button>
+      </div>
+    </div>
+  <div class="away">
+    <div>{{correctScoreData.awayTeam}}</div>
+    <div *ngFor="let away of correctScoreData.away" class="correct-score-item">
+      <span>{{away.score.away}} - {{away.score.home}}</span>
+      <span class="outcome-price" *ngIf="!away.status.suspended">{{getPrice(away.price.decimal)}}</span>
+      <span class="outcome-price" *ngIf="away.status.suspended">SUSPENDED</span>
+      <button mat-icon-button
+              matTooltip="Add to betslip"
+              *ngIf="!away.status.suspended"
+              (click)="addToBetSlip(away)" class="accent"><mat-icon svgIcon="add"></mat-icon></button>
+    </div>
+  </div>
+
+  <span *ngIf="(outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length <= 0">No outcomes currently available for this market</span>
+  <button mat-raised-button *ngIf="detailMode && hasMoreToShow()" color="accent" (click)="showMore.emit()">Show more</button>
+</div>
+
 <span *ngIf="outcomesLoading || moreOutcomesLoading">Outcomes loading...</span>
 <mat-spinner diameter="50" color="accent" *ngIf="outcomesLoading || moreOutcomesLoading"></mat-spinner>

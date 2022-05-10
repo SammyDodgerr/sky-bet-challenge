@@ -1,17 +1,68 @@
 :host{
   position: relative;
   width: 100%;
+
+  .outcomes-wrapper.winDrawWin{
+    display: flex;
+    justify-content: space-between;
+
+    .outcome-name{
+      max-width: 10rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+      flex: 1;
+    }
+  }
 }
 
 mat-spinner{
   margin: 0.5rem auto;
 }
 
-//app-subscribe-for-updates{
-//  position: absolute;
-//  left: 0.5rem;
-//  top: 0.5rem;
-//}
+.add-to-betslip{
+  margin-left: 0.5rem;
+}
+
+.correct-score-data{
+  display: flex;
+  justify-content: space-around;
+
+  .correct-score-item{
+    margin: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .outcome-price{
+      margin: 0 0.25rem;
+    }
+
+    button{
+      $size : 1.5rem;
+      $size-icon : 1rem;
+      height: $size;
+      min-height: $size;
+      max-height: $size;
+      width: $size;
+      min-width: $size;
+      max-width: $size;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      mat-icon{
+        height: $size-icon;
+        min-height: $size-icon;
+        max-height: $size-icon;
+        width: $size-icon;
+        min-width: $size-icon;
+        max-width: $size-icon;
+      }
+    }
+  }
+}
 
 @keyframes flash-outcome {
   0% {

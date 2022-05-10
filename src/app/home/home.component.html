@@ -2,10 +2,19 @@
 
   <div class="matches-wrapper">
 
-    <!-- loop through all the matches with an ngFor -->
-    <app-match *ngFor="let match of allMatches | hideDisplayable"
-               [match]="match">
-    </app-match>
+    <mat-tab-group class="allow-y-scroll">
+
+      <!-- loop through all the match groups -->
+      <mat-tab *ngFor="let matchGroup of allMatchesMap | keyvalue" [label]="matchGroup.key">
+        <ng-template matTabContent>
+          <!-- then loop through all the matches for each tab -->
+          <app-match *ngFor="let match of matchGroup.value | hideDisplayable"
+                     [match]="match">
+          </app-match>
+        </ng-template>
+      </mat-tab>
+
+    </mat-tab-group>
   </div>
 
 </section>

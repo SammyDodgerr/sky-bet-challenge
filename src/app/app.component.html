@@ -14,7 +14,7 @@
   </mat-slide-toggle>
 </div>
 <div class="bet-slip">
-  <h2>Bet Slip</h2>
+  <h2 [ngStyle]="{marginTop: '0.5rem'}">Bet Slip</h2>
   <span *ngIf="bets.size <= 0">Your bet slip is empty</span>
   <div *ngFor="let event of bets | keyvalue">
     <div class="event-key" [matTooltip]="event.key">{{event.key}}</div>

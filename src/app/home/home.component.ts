@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
     webSocketService.onRefreshSocket();
   }
 
-  public allMatches: MatchDetail[] = []
+  public allMatches: MatchDetail[] = [];
+  public allMatchesMap = new Map<string, MatchDetail[]>();
 
   ngOnInit(): void {
     //1) subscribe to all messages
@@ -29,19 +30,30 @@ export class HomeComponent implements OnInit {
       .subscribe(
         () =>
           //3) send our initial request to retrieve all football matches
-        this.getAllMatches()
+          this.getAllMatches()
       );
   }
 
-  private getAllMatches(){
+  private getAllMatches() {
     //always get primary markets, let the UI decide whether or not to show them
     this.webSocketService.sendRequest(JSON.stringify({type: "getLiveEvents", primaryMarkets: true}));
   }
 
   private onHandleWebSocketMessage(message: any) {
-    switch (message.type as ApiMessageType){
+    switch (message.type as ApiMessageType) {
       case ApiMessageType.LiveEventsData:
         this.allMatches = message.data;
+        this.sortOutTabs();
     }
+  }
+
+  sortOutTabs() {
+    var linkedEventTypeName = new Set<string>();
+    this.allMatches.forEach(
+      match => linkedEventTypeName.add(match.linkedEventTypeName ? match.linkedEventTypeName : match.typeName));
+    linkedEventTypeName.forEach(name => {
+      this.allMatchesMap.set(name, this.allMatches.filter(
+        match => match.linkedEventTypeName ? match.linkedEventTypeName === name : match.typeName === name));
+    })
   }
 }

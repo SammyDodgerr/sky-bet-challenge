@@ -77,5 +77,7 @@ export interface Outcome {
   price: { den: number, num: number, decimal: number },
   result: { place: number, result: string, favourite: boolean },
   status: Status,
+  type?: 'home' | 'away', // for correct-score
+  score: Scores,
   flash?: boolean //for ui flashes
 }

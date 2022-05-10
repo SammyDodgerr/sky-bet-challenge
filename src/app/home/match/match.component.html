@@ -10,6 +10,6 @@
   </div>
   <app-primary-market *ngIf="userPreferences.showPrimaryMarkets"
                       [primaryMarket]="primaryMarket"
-                      [eventName]="match?.name"
+                      [event]="match"
                       [outcomes]="outcomes"></app-primary-market>
 </div>

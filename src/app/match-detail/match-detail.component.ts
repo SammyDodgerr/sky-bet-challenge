@@ -96,9 +96,12 @@ export class MatchDetailComponent implements OnInit {
     }
   }
 
-  public retrieveOutcomes(limit = Infinity) {
-    this.primaryMarkets.forEach((key, market) => {
-      key.outcomes.forEach((outcomeId, index) => {
+  public retrieveOutcomes(limit: number) {
+    this.primaryMarkets.forEach((market, key) => {
+      if(market.type === 'correct-score'){
+        limit = 100;
+      }
+      market.outcomes.forEach((outcomeId, index) => {
         if (index < limit) {
           this.webSocketService.sendRequest(JSON.stringify({type: "getOutcome", id: outcomeId}))
         }

@@ -18,4 +18,8 @@
     width: fit-content;
     margin: auto;
   }
+
+  mat-tab-group{
+    max-height: calc(100vh - 4rem);
+  }
 }

@@ -111,8 +111,6 @@ button.accent{
   }
 }
 
-/* You can add global styles to this file, and also import other style files */
-
 html, body {
   height: 100%;
 }
@@ -123,4 +121,12 @@ body {
   font-family: Roboto,
   "Helvetica Neue",
   sans-serif;
+}
+
+/*
+some angular material tweaks
+ */
+
+.allow-y-scroll .mat-tab-body-content {
+  overflow-y: auto !important;
 }

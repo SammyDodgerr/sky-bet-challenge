@@ -29,7 +29,7 @@
         <app-primary-market [primaryMarket]="primaryMarket.value"
                             (showMore)="retrieveMoreOutcomes(primaryMarket.key)"
                             [detailMode]="true"
-                            [eventName]="eventDetail?.name"
+                            [event]="eventDetail"
                             [outcomesLoading]="outcomesLoading.get(primaryMarket.key)"
                             [outcomes]="marketOutcomes.get(primaryMarket.key)">
         </app-primary-market>
