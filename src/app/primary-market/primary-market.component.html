@@ -1,0 +1,11 @@
+<div *ngIf="!outcomesLoading">
+  <span *ngIf="!detailMode">{{primaryMarket?.name}}</span>
+  <div *ngFor="let outcome of outcomes | keyvalue | hideDisplayable : 'value.status.displayable'" class="outcome">
+    <span class="outcome-name">{{outcome.value.name}}</span>
+    <span class="outcome-price">{{getPrice(outcome.value.price.decimal)}}</span>
+  </div>
+  <span *ngIf="(outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length <= 0">No outcomes currently available for this market</span>
+  <button mat-raised-button *ngIf="detailMode && hasMoreToShow()" color="accent" (click)="showMore.emit()">Show more</button>
+</div>
+<span *ngIf="outcomesLoading || moreOutcomesLoading">Outcomes loading...</span>
+<mat-spinner diameter="50" color="accent" *ngIf="outcomesLoading || moreOutcomesLoading"></mat-spinner>

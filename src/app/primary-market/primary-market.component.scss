@@ -1,0 +1,18 @@
+.outcome {
+  margin: 0.5rem;
+
+  &-name {
+    font-size: smaller;
+    margin-right: 0.25rem;
+  }
+
+  &-price {
+    font-size: smaller;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+  }
+}
+
+mat-spinner{
+  margin: 0.5rem auto;
+}

@@ -1,0 +1,46 @@
+<div class="match-detail-background">
+  <div class="loading" *ngIf="showLoading">Loading markets...</div>
+  <mat-spinner diameter="100" *ngIf="showLoading" color="accent"></mat-spinner>
+
+  <div class="metadata" *ngIf="!showLoading">
+    <!--TODO make these names more user friendly with a map!-->
+    <span class="title" *ngIf="eventDetail?.name">{{eventDetail?.name}}</span>
+    <span class="item" *ngIf="eventDetail?.typeName">Type: {{eventDetail?.typeName}}</span>
+    <span class="item" *ngIf="eventDetail?.className">Class Name: {{eventDetail?.className}}</span>
+    <span class="item" *ngIf="eventDetail?.linkedEventTypeName">Linked Event Type Name: {{eventDetail?.linkedEventTypeName}}</span>
+    <span class="item" *ngIf="eventDetail?.startTime">Start time: {{getStartTime()}}</span>
+  </div>
+
+  <mat-accordion *ngIf="!showLoading">
+    <mat-expansion-panel
+      *ngFor="let primaryMarket of primaryMarkets | keyvalue | displayOrderSort | hideDisplayable: 'value.status.displayable'">
+
+      <mat-expansion-panel-header collapsedHeight="2em"
+                                  expandedHeight="2em"
+                                  class="asset-package-header">
+        <mat-panel-title>
+          <span class="label">{{primaryMarket.value.name}}</span>
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <ng-template matExpansionPanelContent>
+        <app-primary-market [primaryMarket]="primaryMarket.value"
+                            (showMore)="retrieveMoreOutcomes(primaryMarket.key)"
+                            [detailMode]="true"
+                            [outcomesLoading]="outcomesLoading"
+                            [outcomes]="marketOutcomes.get(primaryMarket.key)">
+        </app-primary-market>
+      </ng-template>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<button mat-icon-button
+        matTooltip="Go to home"
+        class="accent go-to-home"
+        routerLink="/">
+  <mat-icon svgIcon="home"></mat-icon>
+</button>
