@@ -57,20 +57,39 @@ $sky-bet-test-theme: mat.define-light-theme((
   background-color: map_get(map_get($sky-bet-test-theme, primary), 700);
   color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 50);
 
-  .control-panel {
-    background-color: map_get(map_get($sky-bet-test-theme, accent), 700);
-  }
-
   .matches-wrapper {
     background-color: map_get(map_get($sky-bet-test-theme, primary), 200);
 
     app-match .wrapper {
       background-color: map_get(map_get($sky-bet-test-theme, primary), 100);
-
-      .outcome-price {
-        background-color: map_get(map_get($sky-bet-test-theme, accent), 200);
-      }
     }
+  }
+}
+
+//CONTROL PANEL && BET SLIP
+.control-panel, .bet-slip{
+  background-color: map_get(map_get($sky-bet-test-theme, accent), 700);
+}
+
+//OUTCOME COMPONENT
+.outcome {
+  margin: 0.5rem;
+
+  &.flash{
+    animation: ease-in-out 5s flash-outcome;
+  }
+
+  &-name {
+    font-size: smaller;
+    margin-right: 0.25rem;
+  }
+
+  &-price {
+    font-size: smaller;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    background-color: map_get(map_get($sky-bet-test-theme, accent), 200);
+    color: map_get(map_get(map_get($sky-bet-test-theme, accent), contrast), 50);
   }
 }
 

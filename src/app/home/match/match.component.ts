@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ApiMessageType, MatchDetail, Outcome, PrimaryMarket } from "../../api-models";
 import { WebSocketService } from "../../services/web-socket.service";
 import * as _ from 'lodash';
+import { UserPreferencesService } from "../../../../deployment/services/user-preferences.service";
 
 @Component({
   selector: 'app-match',
@@ -11,15 +12,14 @@ import * as _ from 'lodash';
 export class MatchComponent implements OnInit, OnChanges {
 
   @Input() match: MatchDetail | undefined;
-  @Input() showPrimaryMarkets: boolean | undefined;
-  @Input() showFractionalPrice: boolean | undefined;
 
   public primaryMarket: PrimaryMarket | undefined;
   //map this to id so we only get each outcome once.
   public outcomes: Map<number, Outcome> = new Map();
   private outcomeIdsRetrieved = new Set<string>();
 
-  constructor(private webSocketService: WebSocketService) {
+  constructor(private webSocketService: WebSocketService,
+    public userPreferences: UserPreferencesService) {
   }
 
   ngOnInit(): void {

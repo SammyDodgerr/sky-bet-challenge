@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrimaryMarketComponent } from './primary-market.component';
+import { decimalToFraction, PrimaryMarketComponent } from './primary-market.component';
+import { HideDisplayablePipe } from "../shared/pipes/hide-displayable.pipe";
 
 describe('PrimaryMarketComponent', () => {
   let component: PrimaryMarketComponent;
@@ -8,7 +9,7 @@ describe('PrimaryMarketComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PrimaryMarketComponent ]
+      declarations: [ PrimaryMarketComponent, HideDisplayablePipe ]
     })
     .compileComponents();
   });
@@ -21,5 +22,15 @@ describe('PrimaryMarketComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should convert decimal odds correctly', () => {
+    var decimal = 1.03;
+    expect(decimalToFraction(decimal, true)).toEqual('3/100')
+  });
+
+  it('should convert decimal odds even string', () => {
+    var decimal = '1.03';
+    expect(decimalToFraction(decimal, true)).toEqual('3/100')
   });
 });

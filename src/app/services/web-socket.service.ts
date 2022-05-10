@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Subject } from "rxjs";
-import { ApiMessage } from "../api-models";
+import { Subject } from "rxjs";
+import { ApiMessage, ApiMessageType } from "../api-models";
+import { SubscriptionType } from "../subscribe-for-updates/subscribe-for-updates.component";
+import { filter } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +55,27 @@ export class WebSocketService {
 
   sendRequest(s: string) {
     this.socket?.send(s);
+  }
+
+  getWebSocketMessagesWithFilter(subscriptionType: SubscriptionType, subscriptionId: number) {
+    var idPath: string;
+
+    switch (subscriptionType) {
+      case SubscriptionType.event:
+        idPath = 'eventId';
+        break;
+      case SubscriptionType.market:
+        idPath = 'marketId';
+        break;
+    }
+
+    this.sendRequest(JSON.stringify({type: "subscribe", keys: [`${subscriptionType}.${subscriptionId}`], clearSubscription: false}));
+    return this.getWebSocketMessages().pipe(filter(
+      message => message.data[idPath] == subscriptionId
+    ))
+  }
+
+  onUnsubscribe(subscriptionType: SubscriptionType, subscriptionId: number){
+    this.sendRequest(JSON.stringify({ type: "unsubscribe", keys: [`${subscriptionType}.${subscriptionId}`] }))
   }
 }

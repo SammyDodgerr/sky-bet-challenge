@@ -1,1 +1,29 @@
 <router-outlet></router-outlet>
+
+<!--some global elements that will render in all UIs-->
+<div class="control-panel">
+  <mat-slide-toggle [checked]="userPreferences.showPrimaryMarkets"
+                    *ngIf="showPrimaryMarkets"
+                    (change)="onTogglePrimaryMarkets($event)">
+    Show Primary Markets
+  </mat-slide-toggle>
+
+  <mat-slide-toggle [checked]="userPreferences.fractional"
+                    (change)="onToggleOddsDisplay($event)">
+    Fractional Odds Display
+  </mat-slide-toggle>
+</div>
+<div class="bet-slip">
+  <h2>Bet Slip</h2>
+  <span *ngIf="bets.size <= 0">Your bet slip is empty</span>
+  <div *ngFor="let event of bets | keyvalue">
+    <div class="event-key" [matTooltip]="event.key">{{event.key}}</div>
+    <div class="outcome" *ngFor="let outcome of event.value | keyvalue"  [ngClass]="{flash: outcome.value.flash}">
+      <span class="outcome-name">{{outcome?.value?.name}}</span>
+      <span class="outcome-price"
+            *ngIf="!outcome?.value?.status?.suspended">{{getPrice(outcome?.value?.price?.decimal)}}</span>
+      <span class="outcome-price" *ngIf="outcome?.value?.status?.suspended">SUSPENDED</span>
+    </div>
+  </div>
+  <button mat-raised-button *ngIf="bets.size > 0" (click)="onClearBetSlip()">Clear Bet Slip</button>
+</div>

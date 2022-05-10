@@ -19,6 +19,7 @@ import { PrimaryMarketComponent } from './primary-market/primary-market.componen
 import { MatExpansionModule } from "@angular/material/expansion";
 import { DisplayOrderSortPipe } from './shared/pipes/display-order-sort.pipe';
 import { HideDisplayablePipe } from './shared/pipes/hide-displayable.pipe';
+import { SubscribeForUpdatesComponent } from './subscribe-for-updates/subscribe-for-updates.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HideDisplayablePipe } from './shared/pipes/hide-displayable.pipe';
     MatchDetailComponent,
     PrimaryMarketComponent,
     DisplayOrderSortPipe,
-    HideDisplayablePipe
+    HideDisplayablePipe,
+    SubscribeForUpdatesComponent
   ],
   imports: [
     BrowserModule,

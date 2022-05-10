@@ -14,7 +14,7 @@ export class MatchDetailComponent implements OnInit {
   public eventId: number | undefined;
   private wsReady = false;
   public marketsLoading = true;
-  public outcomesLoading = true;
+  public outcomesLoading= new Map<any, boolean>();
   public eventDetail: MatchDetail | undefined;
   public primaryMarkets = new Map<number, PrimaryMarket>();
   public marketOutcomes = new Map<number, Map<number, Outcome>>();
@@ -27,7 +27,7 @@ export class MatchDetailComponent implements OnInit {
 
   //use a debounce to load all outcomes before showing in the ui
   outcomesLoadingDebounce: Function = _.debounce(() => {
-    this.outcomesLoading = false;
+    this.outcomesLoading = new Map();
   }, 500);
 
   get showLoading() {
@@ -73,7 +73,6 @@ export class MatchDetailComponent implements OnInit {
     switch (message.type) {
       case ApiMessageType.EventData:
         this.eventDetail = message.data;
-        console.log(this.eventDetail);
         this.eventDetail?.markets?.forEach(
           marketId => this.webSocketService.sendRequest(JSON.stringify({type: "getMarket", id: marketId}))
         );
@@ -108,7 +107,7 @@ export class MatchDetailComponent implements OnInit {
   }
 
   public retrieveMoreOutcomes(marketId: number) {
-    this.outcomesLoading = true;
+    this.outcomesLoading.set(marketId, true);
     this.primaryMarkets.get(marketId)?.outcomes.forEach((outcomeId, index) => {
       this.webSocketService.sendRequest(JSON.stringify({type: "getOutcome", id: outcomeId}))
     });

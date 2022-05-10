@@ -1,0 +1,19 @@
+button{
+  $size : 3rem;
+  $size-icon : 2rem;
+  height: $size;
+  min-height: $size;
+  max-height: $size;
+  width: $size;
+  min-width: $size;
+  max-width: $size;
+
+  mat-icon{
+    height: $size-icon;
+    min-height: $size-icon;
+    max-height: $size-icon;
+    width: $size-icon;
+    min-width: $size-icon;
+    max-width: $size-icon;
+  }
+}

@@ -1,0 +1,29 @@
+.control-panel {
+  position: fixed;
+  top: 0.5rem;
+  right: 5rem;
+  border-radius: 0.25rem;
+  margin-bottom:  calc(2 * var(--margin-bottom));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  mat-slide-toggle{
+    margin: 1rem;
+  }
+}
+
+.bet-slip{
+  position: fixed;
+  top: 5.5rem;
+  right: 5rem;
+  padding: 1rem;
+  border-radius: 0.25rem;
+
+  .event-key{
+    max-width: 25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

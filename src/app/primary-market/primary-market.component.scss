@@ -1,18 +1,23 @@
-.outcome {
-  margin: 0.5rem;
-
-  &-name {
-    font-size: smaller;
-    margin-right: 0.25rem;
-  }
-
-  &-price {
-    font-size: smaller;
-    padding: 0.25rem;
-    border-radius: 0.25rem;
-  }
+:host{
+  position: relative;
+  width: 100%;
 }
 
 mat-spinner{
   margin: 0.5rem auto;
+}
+
+//app-subscribe-for-updates{
+//  position: absolute;
+//  left: 0.5rem;
+//  top: 0.5rem;
+//}
+
+@keyframes flash-outcome {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: green;
+  }
 }

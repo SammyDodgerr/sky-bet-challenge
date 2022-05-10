@@ -15,9 +15,7 @@ export class HomeComponent implements OnInit {
     webSocketService.onRefreshSocket();
   }
 
-  public allMatches: MatchDetail[] = [];
-  public showPrimaryMarkets = false;
-  public fractional = false;
+  public allMatches: MatchDetail[] = []
 
   ngOnInit(): void {
     //1) subscribe to all messages
@@ -45,13 +43,5 @@ export class HomeComponent implements OnInit {
       case ApiMessageType.LiveEventsData:
         this.allMatches = message.data;
     }
-  }
-
-  onTogglePrimaryMarkets(event: MatSlideToggleChange) {
-    this.showPrimaryMarkets = event.checked;
-  }
-
-  onToggleOddsDisplay(event: MatSlideToggleChange) {
-    this.fractional = event.checked;
   }
 }

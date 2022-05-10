@@ -1,4 +1,4 @@
-<div class="wrapper" [ngClass]="{'show-primary-markets': showPrimaryMarkets}">
+<div class="wrapper" [ngClass]="{'show-primary-markets': userPreferences.showPrimaryMarkets}">
   <div class="summary">
     <span>{{match?.name}}</span>
     <button mat-icon-button
@@ -8,8 +8,8 @@
       <mat-icon svgIcon="open-in-new"></mat-icon>
     </button>
   </div>
-  <app-primary-market *ngIf="showPrimaryMarkets"
+  <app-primary-market *ngIf="userPreferences.showPrimaryMarkets"
                       [primaryMarket]="primaryMarket"
-                      [outcomes]="outcomes"
-                      [showFractionalPrice]="showFractionalPrice"></app-primary-market>
+                      [eventName]="match?.name"
+                      [outcomes]="outcomes"></app-primary-market>
 </div>

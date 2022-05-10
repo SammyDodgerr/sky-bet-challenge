@@ -3,7 +3,7 @@
   <mat-spinner diameter="100" *ngIf="showLoading" color="accent"></mat-spinner>
 
   <div class="metadata" *ngIf="!showLoading">
-    <!--TODO make these names more user friendly with a map!-->
+    <!--TODO make these names more user friendly with a map-->
     <span class="title" *ngIf="eventDetail?.name">{{eventDetail?.name}}</span>
     <span class="item" *ngIf="eventDetail?.typeName">Type: {{eventDetail?.typeName}}</span>
     <span class="item" *ngIf="eventDetail?.className">Class Name: {{eventDetail?.className}}</span>
@@ -11,7 +11,7 @@
     <span class="item" *ngIf="eventDetail?.startTime">Start time: {{getStartTime()}}</span>
   </div>
 
-  <mat-accordion *ngIf="!showLoading">
+  <mat-accordion *ngIf="!showLoading" multi>
     <mat-expansion-panel
       *ngFor="let primaryMarket of primaryMarkets | keyvalue | displayOrderSort | hideDisplayable: 'value.status.displayable'">
 
@@ -29,7 +29,8 @@
         <app-primary-market [primaryMarket]="primaryMarket.value"
                             (showMore)="retrieveMoreOutcomes(primaryMarket.key)"
                             [detailMode]="true"
-                            [outcomesLoading]="outcomesLoading"
+                            [eventName]="eventDetail?.name"
+                            [outcomesLoading]="outcomesLoading.get(primaryMarket.key)"
                             [outcomes]="marketOutcomes.get(primaryMarket.key)">
         </app-primary-market>
       </ng-template>

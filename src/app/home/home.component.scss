@@ -12,17 +12,6 @@
   --border-radius: 0.25rem;
   --margin-bottom: 1rem;
 
-  .control-panel {
-    width: var(--width);
-    padding: var(--padding);
-    margin: auto;
-    border-radius: var(--border-radius);
-    margin-bottom:  calc(2 * var(--margin-bottom));
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
   .matches-wrapper {
     padding: 2rem;
     height: fit-content;

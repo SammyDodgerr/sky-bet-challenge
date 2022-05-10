@@ -1,24 +1,10 @@
 <section class="home-background">
 
   <div class="matches-wrapper">
-    <div class="control-panel">
-      <mat-slide-toggle [checked]="showPrimaryMarkets"
-                        (change)="onTogglePrimaryMarkets($event)">
-        Show Primary Markets
-      </mat-slide-toggle>
-
-      <mat-slide-toggle [checked]="fractional"
-                        [disabled]="!showPrimaryMarkets"
-                        (change)="onToggleOddsDisplay($event)">
-        Switch Odds Display
-      </mat-slide-toggle>
-    </div>
 
     <!-- loop through all the matches with an ngFor -->
     <app-match *ngFor="let match of allMatches | hideDisplayable"
-               [match]="match"
-               [showFractionalPrice]="fractional"
-               [showPrimaryMarkets]="showPrimaryMarkets">
+               [match]="match">
     </app-match>
   </div>
 

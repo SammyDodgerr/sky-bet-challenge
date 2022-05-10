@@ -7,6 +7,9 @@ export class IconRegistryService {
   icons = [
     {name: 'open-in-new', url: 'assets/SVG/open_in_new_black.svg'},
     {name: 'home', url: 'assets/SVG/home_black.svg'},
+    {name: 'subscribe', url: 'assets/SVG/subscribe.svg'},
+    {name: 'tick', url: 'assets/SVG/tick.svg'},
+    {name: 'add', url: 'assets/SVG/add.svg'},
   ];
 
 

@@ -9,7 +9,8 @@ export enum ApiMessageType {
   LiveEventsData = 'LIVE_EVENTS_DATA',
   EventData = 'EVENT_DATA',
   MarketData = 'MARKET_DATA',
-  OutcomeData = 'OUTCOME_DATA'
+  OutcomeData = 'OUTCOME_DATA',
+  PriceChange = 'PRICE_CHANGE'
 }
 
 export interface MatchDetail {
@@ -76,4 +77,5 @@ export interface Outcome {
   price: { den: number, num: number, decimal: number },
   result: { place: number, result: string, favourite: boolean },
   status: Status,
+  flash?: boolean //for ui flashes
 }

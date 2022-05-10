@@ -1,8 +1,18 @@
 <div *ngIf="!outcomesLoading">
-  <span *ngIf="!detailMode">{{primaryMarket?.name}}</span>
-  <div *ngFor="let outcome of outcomes | keyvalue | hideDisplayable : 'value.status.displayable'" class="outcome">
+  <app-subscribe-for-updates
+    *ngIf="(outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length > 0"
+    (priceChange)="onPriceChange($event)"
+    [subscriptionId]="primaryMarket?.eventId">
+
+  </app-subscribe-for-updates>
+  <span *ngIf="!detailMode && (outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length > 0">{{primaryMarket?.name}}</span>
+  <div *ngFor="let outcome of outcomes | keyvalue | hideDisplayable : 'value.status.displayable'" class="outcome" [ngClass]="{flash: outcome.value.flash} ">
     <span class="outcome-name">{{outcome.value.name}}</span>
-    <span class="outcome-price">{{getPrice(outcome.value.price.decimal)}}</span>
+    <span class="outcome-price" *ngIf="!outcome.value.status.suspended">{{getPrice(outcome.value.price.decimal)}}</span>
+    <span class="outcome-price" *ngIf="outcome.value.status.suspended">SUSPENDED</span>
+    <button mat-icon-button
+            matTooltip="Add to betslip"
+            (click)="addToBetSlip(outcome.value)" color="primary"><mat-icon svgIcon="add"></mat-icon></button>
   </div>
   <span *ngIf="(outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length <= 0">No outcomes currently available for this market</span>
   <button mat-raised-button *ngIf="detailMode && hasMoreToShow()" color="accent" (click)="showMore.emit()">Show more</button>

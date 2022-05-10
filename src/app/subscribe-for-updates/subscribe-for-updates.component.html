@@ -1,0 +1,8 @@
+
+<span *ngIf="subscriptionActive">Subscribed for updates</span>
+
+<button mat-icon-button
+        [matTooltip]="subscriptionActive ? 'unsubscribe' : 'subscribe'"
+        (click)="subscriptionActive ? onUnsubscribe() : onSubscribe()" color="accent">
+<mat-icon [svgIcon]="subscriptionActive ? 'tick' : 'subscribe'"></mat-icon>
+</button>
