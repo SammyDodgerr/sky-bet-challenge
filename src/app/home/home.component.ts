@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
   }
 
   sortOutTabs() {
-    var linkedEventTypeName = new Set<string>();
+    const linkedEventTypeName = new Set<string>();
     this.allMatches.forEach(
       match => linkedEventTypeName.add(match.linkedEventTypeName ? match.linkedEventTypeName : match.typeName));
     linkedEventTypeName.forEach(name => {

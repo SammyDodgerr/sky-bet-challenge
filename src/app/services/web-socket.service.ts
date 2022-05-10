@@ -58,7 +58,7 @@ export class WebSocketService {
   }
 
   getWebSocketMessagesWithFilter(subscriptionType: SubscriptionType, subscriptionId: number) {
-    var idPath: string;
+    let idPath: string;
 
     switch (subscriptionType) {
       case SubscriptionType.event:

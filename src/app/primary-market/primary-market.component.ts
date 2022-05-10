@@ -5,6 +5,7 @@ import { MatchDetail, Outcome, PrimaryMarket } from "../api-models";
 import * as _ from 'lodash';
 import { UserPreferencesService } from "../../../deployment/services/user-preferences.service";
 import { BetSlipServiceService } from "../services/bet-slip-service.service";
+import Fraction from "fraction.js";
 
 @Component({
   selector: 'app-primary-market',
@@ -49,7 +50,7 @@ export class PrimaryMarketComponent implements OnChanges {
 
   //logic for switching between display prices
   getPrice(decimal: any) {
-    return decimalToFraction(parseFloat(decimal).toFixed(3), this.userPrefences.fractional);
+    return decimalToFraction(parseFloat(decimal), this.userPrefences.fractional);
   }
 
   hasMoreToShow() {
@@ -57,9 +58,8 @@ export class PrimaryMarketComponent implements OnChanges {
   }
 
   onPriceChange(event: Outcome) {
-    console.log(event, this.outcomes, this.outcomes?.has(event.outcomeId), event.eventId === this.event?.eventId, event.marketId === this.primaryMarket?.marketId);
     if (this.outcomes?.has(event.outcomeId)) {
-      var oldOutcome = this.outcomes?.get(event.outcomeId) as Outcome;
+      const oldOutcome = this.outcomes?.get(event.outcomeId) as Outcome;
       _.set(oldOutcome, 'status', event.status);
       _.set(oldOutcome, 'price', event.price);
       _.set(oldOutcome, 'flash', true);
@@ -73,26 +73,11 @@ export class PrimaryMarketComponent implements OnChanges {
   }
 }
 
-//NB adopted from https://gist.github.com/redteam-snippets/3934258
 export function decimalToFraction(_decimal: any, fractional: boolean): string {
   if (!fractional) {
     return parseFloat(_decimal).toFixed(2);
   }
-  var top: any = _decimal.toString().replace(/\d+[.]/, '');
-  var bottom = Math.pow(10, top.length);
-  if (_decimal > 1) {
-    top = +top + Math.floor(_decimal) * bottom;
-  }
-  var x = gcd(top, bottom);
-  var values = {
-    top: (top / x),
-    bottom: (bottom / x),
-    //minus 1 here for correct conversion! see betting odds
-    display: ((top / x) - (bottom / x)).toString(10).substr(0, 3) + '/' + (bottom / x).toString(10).substr(0, 3)
-  };
-  return values.display;
-}
-
-function gcd(a: number, b: number): number {
-  return (b) ? gcd(b, a % b) : a;
+  _decimal--;
+  const fraction = new Fraction(_decimal).toFraction();
+  return fraction.includes('/') ? fraction : `${fraction}/1`;
 }

@@ -5,10 +5,9 @@ services:
       sbgtechtest/api:latest
     ports:
       - "8888-8890:8888-8890"
-# todo uncomment this out!
-#  ui:
-#    build: ../
-#    ports:
-#      - "3000:80"
-#    depends_on:
-#      - api
+  ui:
+    build: ../
+    ports:
+      - "3000:80"
+    depends_on:
+      - api

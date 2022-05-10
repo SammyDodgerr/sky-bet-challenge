@@ -47,7 +47,7 @@ export class AppComponent {
 
   //logic for switching between display prices
   getPrice(decimal: any) {
-    return decimalToFraction(parseFloat(decimal).toFixed(3), this.userPreferences.fractional);
+    return decimalToFraction(parseFloat(decimal), this.userPreferences.fractional);
   }
 
   onClearBetSlip() {

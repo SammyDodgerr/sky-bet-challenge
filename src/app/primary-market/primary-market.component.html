@@ -11,7 +11,7 @@
        [ngClass]="{flash: outcome.value.flash}">
     <span class="outcome-name">{{outcome.value.name}}</span>
     <span class="outcome-price" *ngIf="!outcome.value.status?.suspended">{{getPrice(outcome.value.price.decimal)}}</span>
-    <span class="outcome-price" *ngIf="outcome.value.status?.suspended">SUSPENDED</span>
+    <span class="outcome-price suspended" *ngIf="outcome.value.status?.suspended">SUSPENDED</span>
     <button mat-icon-button
             matTooltip="Add to betslip"
             *ngIf="!outcome.value.status?.suspended"

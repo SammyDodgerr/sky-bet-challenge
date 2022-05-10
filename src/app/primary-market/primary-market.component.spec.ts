@@ -25,17 +25,32 @@ describe('PrimaryMarketComponent', () => {
   });
 
   it('should convert decimal odds correctly', () => {
-    var decimal = 1.03;
+    const decimal = 1.03;
     expect(decimalToFraction(decimal, true)).toEqual('3/100')
   });
 
   it('should convert decimal odds even string', () => {
-    var decimal = '1.03';
+    const decimal = '1.03';
     expect(decimalToFraction(decimal, true)).toEqual('3/100')
   });
 
   it('should convert decimal odds correctly', () => {
-    var decimal = 6;
+    const decimal = 6.000;
+    expect(decimalToFraction(decimal, false)).toEqual('6.00')
+  });
+
+  it('should convert decimal odds correctly', () => {
+    const decimal = 6.000;
     expect(decimalToFraction(decimal, true)).toEqual('5/1')
+  });
+
+  it('should convert decimal odds correctly', () => {
+    const decimal = 2.62;
+    expect(decimalToFraction(decimal, true)).toEqual('81/50')
+  });
+
+  it('should convert decimal odds correctly', () => {
+    const decimal = 14;
+    expect(decimalToFraction(decimal, true)).toEqual('13/1')
   });
 });
