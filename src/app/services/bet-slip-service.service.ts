@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { ApiMessage, ApiMessageType, Outcome, PrimaryMarket } from "../api-models";
 import { WebSocketService } from "./web-socket.service";
 import * as _ from "lodash";
@@ -20,17 +20,17 @@ export class BetSlipServiceService {
 
   }
 
-  getBets(): Subject<Map<any, Map<any, Outcome>>>{
+  getBets(): Subject<Map<any, Map<any, Outcome>>> {
     return this.betsSub;
   }
 
-  clear(){
+  clear() {
     this.bets = new Map();
     this.betsSub.next(this.bets);
   }
 
   addToBetSlip(outcome: Outcome, market: PrimaryMarket, eventName: any) {
-    if(this.bets.has(`${eventName} : ${market.name}`)){
+    if (this.bets.has(`${eventName} : ${market.name}`)) {
       var existingOutcomes = this.bets.get(`${eventName} : ${market.name}`);
       existingOutcomes?.set(outcome.outcomeId, outcome);
       this.bets?.set(`${eventName} : ${market.name}`, existingOutcomes as Map<any, Outcome>);
@@ -44,6 +44,7 @@ export class BetSlipServiceService {
     this.webSocketService.sendRequest(JSON.stringify({type: "subscribe", keys: [`o.${outcome.outcomeId}`]}));
   }
 
+  //handle price changes to bets!
   private onHandleWsSocketMessage(result: ApiMessage) {
     const eventId = _.get(result, 'data.eventId');
     const outcomeId = _.get(result, 'data.outcomeId');

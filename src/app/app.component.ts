@@ -23,20 +23,19 @@ export class AppComponent {
     router.events
       .subscribe((val) => {
         if (val instanceof NavigationEnd) {
-          this.showPrimaryMarkets = !val.urlAfterRedirects.includes('event-detail');
+          this.inOverviewUI = !val.urlAfterRedirects.includes('event-detail');
         }
       });
 
     betSlipService.getBets().subscribe(
       bets => {
         this.bets = bets;
-        console.log(bets);
       }
     )
   }
 
   title = 'sky-bet-test';
-  showPrimaryMarkets = true;
+  inOverviewUI = true;
 
   onTogglePrimaryMarkets(event: MatSlideToggleChange) {
     this.userPreferences.showPrimaryMarkets = event.checked;

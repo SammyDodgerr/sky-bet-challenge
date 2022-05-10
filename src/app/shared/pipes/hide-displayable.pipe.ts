@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import * as _ from 'lodash';
 
 @Pipe({
-  name: 'hideDisplayable'
+  name: 'hideDisplayable',
+  pure: false
 })
 export class HideDisplayablePipe implements PipeTransform {
 
@@ -13,5 +14,4 @@ export class HideDisplayablePipe implements PipeTransform {
       return value.filter(item => _.get(item, propertyPath, true));
     }
   }
-
 }

@@ -5,33 +5,47 @@
 //angular material styling
 @include mat.core();
 
+
+//DA0000
+//00246B
+
+//basic theme for our needs
+$primary-1: #002369;
+$primary-2: #003CB5;
+$primary-3: #5991FF;
+
+$accent-1: #802020;
+$accent-2: #FF0000;
+$accent-3: #FF5E5E;
+
 $sky-bet-test-primary-map: (
-  50 : #132C6C,
-  100 : #132C6C,
-  200 : #2658D9,
-  300 : #2658D9,
-  400 : #93ACEC,
-  500 : #93ACEC,
-  600 : #93ACEC,
-  700:#93ACEC,
-  800:#93ACEC,
-  900:#93ACEC,
+  50 : $primary-1,
+  100 : $primary-1,
+  200 : $primary-2,
+  300 : $primary-2,
+  400 : $primary-3,
+  500 : $primary-3,
+  600 : $primary-3,
+  700:$primary-3,
+  800:$primary-3,
+  900:$primary-3,
   contrast: (
-    50: #ececec
+    50: #ececec,
+    100: #ffffff
   )
 );
 
 $sky-bet-test-accent-map: (
-  50 : #730D0C,
-  100 : #730D0C,
-  200 : #DF1918,
-  300 : #DF1918,
-  400 : #DF1918,
-  500 : #DF1918,
-  600 : #DF1918,
-  700 : #F38C8C,
-  800 : #F38C8C,
-  900 : #F38C8C,
+  50 : $accent-1,
+  100 : $accent-1,
+  200 : $accent-2,
+  300 : $accent-2,
+  400 : $accent-2,
+  500 : $accent-2,
+  600 : $accent-2,
+  700 : $accent-3,
+  800 : $accent-3,
+  900 : $accent-3,
   contrast: (
     50: #ececec
   )
@@ -66,16 +80,27 @@ $sky-bet-test-theme: mat.define-light-theme((
   }
 }
 
-//CONTROL PANEL && BET SLIP
-.control-panel, .bet-slip{
-  background-color: map_get(map_get($sky-bet-test-theme, accent), 700);
+//CONTROL PANEL
+.control-panel {
+  background-color: map_get(map_get($sky-bet-test-theme, accent), 100);
+  color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 50);
+}
+
+//BET SLIP
+.bet-slip {
+  background-color: map_get(map_get($sky-bet-test-theme, accent), 500);
+  color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 50);
+
+  .outcome-price{
+    background-color: map_get(map_get($sky-bet-test-theme, primary), 200);
+  }
 }
 
 //OUTCOME COMPONENT
 .outcome {
   margin: 0.5rem;
 
-  &.flash{
+  &.flash {
     animation: ease-in-out 5s flash-outcome;
   }
 
@@ -94,18 +119,19 @@ $sky-bet-test-theme: mat.define-light-theme((
 }
 
 //MATCH DETAIL
-.match-detail-background{
+.match-detail-background {
   background-color: map_get(map_get($sky-bet-test-theme, primary), 700);
   color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 50);
 
-  .metadata{
+  .metadata {
     background-color: map_get(map_get($sky-bet-test-theme, accent), 50);
   }
 }
 
-button.accent{
+button.accent {
   background-color: map_get(map_get($sky-bet-test-theme, accent), 50);
-  svg{
+
+  svg {
     fill: map_get(map_get(map_get($sky-bet-test-theme, accent), contrast), 50);
 
   }
@@ -129,4 +155,17 @@ some angular material tweaks
 
 .allow-y-scroll .mat-tab-body-content {
   overflow-y: auto !important;
+}
+
+.mat-expansion-panel {
+  background-color: map_get(map_get($sky-bet-test-theme, primary), 100);
+  color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 50);
+
+  .mat-expansion-indicator::after, mat-panel-title {
+    color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 50);
+  }
+}
+
+.mat-tab-label{
+  color: map_get(map_get(map_get($sky-bet-test-theme, primary), contrast), 100);
 }

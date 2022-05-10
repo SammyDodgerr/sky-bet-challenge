@@ -3,7 +3,7 @@
 <!--some global elements that will render in all UIs-->
 <div class="control-panel">
   <mat-slide-toggle [checked]="userPreferences.showPrimaryMarkets"
-                    *ngIf="showPrimaryMarkets"
+                    *ngIf="inOverviewUI"
                     (change)="onTogglePrimaryMarkets($event)">
     Show Primary Markets
   </mat-slide-toggle>
@@ -15,7 +15,7 @@
 </div>
 <div class="bet-slip">
   <h2 [ngStyle]="{marginTop: '0.5rem'}">Bet Slip</h2>
-  <span *ngIf="bets.size <= 0">Your bet slip is empty</span>
+  <span *ngIf="bets.size <= 0">Your bet slip is empty, {{inOverviewUI ? 'what do you fancy?' : '2-0 is looking juicy?'}}</span>
   <div *ngFor="let event of bets | keyvalue">
     <div class="event-key" [matTooltip]="event.key">{{event.key}}</div>
     <div class="outcome" *ngFor="let outcome of event.value | keyvalue"  [ngClass]="{flash: outcome.value.flash}">

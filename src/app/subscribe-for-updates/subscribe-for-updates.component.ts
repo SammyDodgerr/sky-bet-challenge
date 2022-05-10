@@ -13,9 +13,9 @@ export enum SubscriptionType{
   templateUrl: './subscribe-for-updates.component.html',
   styleUrls: ['./subscribe-for-updates.component.scss']
 })
-export class SubscribeForUpdatesComponent implements OnChanges {
+export class SubscribeForUpdatesComponent {
 
-  @Input() subscriptionType: SubscriptionType = SubscriptionType.event;
+  @Input() subscriptionType: SubscriptionType = SubscriptionType.market;
   @Input() subscriptionId: number | undefined;
   @Output() priceChange = new EventEmitter();
 
@@ -38,10 +38,7 @@ export class SubscribeForUpdatesComponent implements OnChanges {
       this.websocketSubscription = null;
     }
     this.subscriptionActive = false;
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-
+    this.webSocketService.sendRequest(JSON.stringify({type: "unsubscribe", keys: [`${this.subscriptionType}.${this.subscriptionId}`]}));
   }
 
   private onHandleMessage(message: ApiMessage) {

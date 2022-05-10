@@ -1,7 +1,7 @@
 <app-subscribe-for-updates
   *ngIf="!outcomesLoading && (outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length > 0"
   (priceChange)="onPriceChange($event)"
-  [subscriptionId]="primaryMarket?.eventId">
+  [subscriptionId]="primaryMarket?.marketId">
 </app-subscribe-for-updates>
 
 <div  *ngIf="!outcomesLoading && !correctScoreData" class="outcomes-wrapper" [ngClass]="{winDrawWin: primaryMarket?.type === 'win-draw-win'}">
@@ -10,10 +10,11 @@
        class="outcome"
        [ngClass]="{flash: outcome.value.flash}">
     <span class="outcome-name">{{outcome.value.name}}</span>
-    <span class="outcome-price" *ngIf="!outcome.value.status.suspended">{{getPrice(outcome.value.price.decimal)}}</span>
-    <span class="outcome-price" *ngIf="outcome.value.status.suspended">SUSPENDED</span>
+    <span class="outcome-price" *ngIf="!outcome.value.status?.suspended">{{getPrice(outcome.value.price.decimal)}}</span>
+    <span class="outcome-price" *ngIf="outcome.value.status?.suspended">SUSPENDED</span>
     <button mat-icon-button
             matTooltip="Add to betslip"
+            *ngIf="!outcome.value.status?.suspended"
             (click)="addToBetSlip(outcome.value)" class="accent add-to-betslip"><mat-icon svgIcon="add"></mat-icon></button>
   </div>
   <span *ngIf="(outcomes | keyvalue | hideDisplayable : 'value.status.displayable').length <= 0">No outcomes currently available for this market</span>

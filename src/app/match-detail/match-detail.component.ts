@@ -22,7 +22,7 @@ export class MatchDetailComponent implements OnInit {
   //use a debounce to load all the data before rendering the UI
   marketsLoadingDebounce: Function = _.debounce(() => {
     this.marketsLoading = false;
-    this.retrieveOutcomes(10);
+    this.retrieveOutcomes();
   }, 500);
 
   //use a debounce to load all outcomes before showing in the ui
@@ -96,11 +96,9 @@ export class MatchDetailComponent implements OnInit {
     }
   }
 
-  public retrieveOutcomes(limit: number) {
+  public retrieveOutcomes() {
     this.primaryMarkets.forEach((market, key) => {
-      if(market.type === 'correct-score'){
-        limit = 100;
-      }
+      const limit = market.type === 'correct-score' ? 100 : 10; //show them all for the correct score for beter ux
       market.outcomes.forEach((outcomeId, index) => {
         if (index < limit) {
           this.webSocketService.sendRequest(JSON.stringify({type: "getOutcome", id: outcomeId}))

@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
+} from '@angular/core';
 import { MatchDetail, Outcome, PrimaryMarket } from "../api-models";
 import * as _ from 'lodash';
 import { UserPreferencesService } from "../../../deployment/services/user-preferences.service";
@@ -21,6 +23,7 @@ export class PrimaryMarketComponent implements OnChanges {
 
 
   constructor(public userPrefences: UserPreferencesService,
+    private cd: ChangeDetectorRef,
     private betSlipService: BetSlipServiceService) {
   }
 
@@ -41,8 +44,6 @@ export class PrimaryMarketComponent implements OnChanges {
           this.correctScoreData.away.push(outcome);
         }
       });
-
-      //sort the scores?
     }
   }
 
@@ -56,12 +57,14 @@ export class PrimaryMarketComponent implements OnChanges {
   }
 
   onPriceChange(event: Outcome) {
+    console.log(event, this.outcomes, this.outcomes?.has(event.outcomeId), event.eventId === this.event?.eventId, event.marketId === this.primaryMarket?.marketId);
     if (this.outcomes?.has(event.outcomeId)) {
       var oldOutcome = this.outcomes?.get(event.outcomeId) as Outcome;
       _.set(oldOutcome, 'status', event.status);
       _.set(oldOutcome, 'price', event.price);
       _.set(oldOutcome, 'flash', true);
       this.outcomes?.set(event.outcomeId, oldOutcome as Outcome);
+      this.cd.detectChanges();
     }
   }
 
